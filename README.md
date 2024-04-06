@@ -1,1 +1,3 @@
 # try-catch-groww
+
+Investors can leverage the platform's customization options to create bespoke screens tailored to their unique preferences and investment goals, enhancing their ability to identify promising stocks within specific sectors and market segments. They are advised to buy or sell the stock based on historical data and news data available on internet. LSTMs are used to generate sentiment behind the reasoning of buying or selling of stock.
