@@ -1,3 +1,2 @@
-python
-mysql.connector
-flask
+mysql.connector==2.2.9
+flask==3.0.2
