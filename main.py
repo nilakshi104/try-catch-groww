@@ -1,6 +1,6 @@
 import mysql.connector
 from flask import Flask, jsonify, request
-app = Flask(__name__)
+app = Flask(_name_)
 
 # MySQL Database Configuration
 db_config = {
@@ -33,5 +33,35 @@ def get_stock_data(company_code):
     print(data)
     return jsonify(data)
 
-if __name__ == '__main__':
+@app.route('/stockalldata/<company_code>/daily', methods=['GET'])
+def get_stock_data(company_code):
+    connection = connect_to_database()
+    if not connection:
+        return jsonify({'error': 'Failed to connect to the database'}), 500
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Companies where Symbol = %s", (company_code,))
+    companies = cursor.fetchall()
+    print(companies)
+    cursor.execute("SELECT distinct  * FROM DailyStockData where CompanyID = %s", (companies[0]['CompanyID'],))
+    data = cursor.fetchall()
+    print(data)
+    return jsonify(data)
+
+@app.route('/stockalldata/<company_code>/weekly', methods=['GET'])
+def get_stock_data(company_code):
+    connection = connect_to_database()
+    if not connection:
+        return jsonify({'error': 'Failed to connect to the database'}), 500
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Companies where Symbol = %s", (company_code,))
+    companies = cursor.fetchall()
+    print(companies)
+    cursor.execute("SELECT distinct  * FROM WeeklyStockData where CompanyID = %s", (companies[0]['CompanyID'],))
+    data = cursor.fetchall()
+    print(data)
+    return jsonify(data)
+
+
+
+if _name_ == '_main_':
     app.run(debug=True)
